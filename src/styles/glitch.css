@@ -1,0 +1,255 @@
+/* ============================================================
+   VAPORWAVE VOID SQUAD — ADVANCED GLITCH EFFECTS
+   glitch.css
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   GLITCH CONTAINER
+   Usage: <element class="glitch-container" data-text="YOUR TEXT">
+            YOUR TEXT
+          </element>
+---------------------------------------------------------- */
+.glitch-container {
+  position: relative;
+  display:  inline-block;
+}
+
+/* Shared pseudo-element base */
+.glitch-container::before,
+.glitch-container::after {
+  content:  attr(data-text);
+  position: absolute;
+  top:      0;
+  left:     0;
+  width:    100%;
+  height:   100%;
+
+  /* Inherit typography from parent so they overlay exactly */
+  font-size:   inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  white-space: inherit;
+}
+
+/* Pink channel — shifts left */
+.glitch-container::before {
+  color:      #FF6EC7;
+  text-shadow: none;
+  animation:  glitch-before 2.4s steps(1) infinite;
+  z-index:    1;
+  mix-blend-mode: screen;
+}
+
+/* Cyan channel — shifts right */
+.glitch-container::after {
+  color:      #00FFFF;
+  text-shadow: none;
+  animation:  glitch-after 2.4s steps(1) infinite;
+  animation-delay: 0.12s;
+  z-index:    2;
+  mix-blend-mode: screen;
+}
+
+/* ----------------------------------------------------------
+   @keyframes glitch-before  (pink channel, left shift)
+---------------------------------------------------------- */
+@keyframes glitch-before {
+  0%   { clip-path: inset(0 0 95% 0);    transform: translate(-2px, 0); }
+  5%   { clip-path: inset(30% 0 50% 0);  transform: translate(-2px, 0); }
+  10%  { clip-path: inset(65% 0 10% 0);  transform: translate(-2px, 1px); }
+  12%  { clip-path: inset(0 0 95% 0);    transform: translate(0, 0); }
+  20%  { clip-path: inset(80% 0 5% 0);   transform: translate(-2px, 0); }
+  22%  { clip-path: inset(0 0 0 0);      transform: translate(0, 0); }
+  25%  { clip-path: inset(45% 0 45% 0);  transform: translate(-2px, -1px); }
+  27%  { clip-path: inset(0 0 95% 0);    transform: translate(0, 0); }
+  35%  { clip-path: inset(15% 0 72% 0);  transform: translate(-2px, 0); }
+  37%  { clip-path: inset(0 0 95% 0);    transform: translate(0, 0); }
+  50%  { clip-path: inset(55% 0 30% 0);  transform: translate(-2px, 1px); }
+  52%  { clip-path: inset(0 0 95% 0);    transform: translate(0, 0); }
+  60%  { clip-path: inset(90% 0 2% 0);   transform: translate(-2px, 0); }
+  62%  { clip-path: inset(0 0 95% 0);    transform: translate(0, 0); }
+  75%  { clip-path: inset(20% 0 60% 0);  transform: translate(-2px, 0); }
+  77%  { clip-path: inset(0 0 95% 0);    transform: translate(0, 0); }
+  90%  { clip-path: inset(70% 0 15% 0);  transform: translate(-2px, -1px); }
+  92%  { clip-path: inset(0 0 95% 0);    transform: translate(0, 0); }
+  100% { clip-path: inset(0 0 95% 0);    transform: translate(0, 0); }
+}
+
+/* ----------------------------------------------------------
+   @keyframes glitch-after  (cyan channel, right shift)
+---------------------------------------------------------- */
+@keyframes glitch-after {
+  0%   { clip-path: inset(95% 0 0 0);    transform: translate(2px, 0); }
+  7%   { clip-path: inset(40% 0 40% 0);  transform: translate(2px, 0); }
+  9%   { clip-path: inset(75% 0 0 0);    transform: translate(2px, -1px); }
+  11%  { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+  18%  { clip-path: inset(5% 0 82% 0);   transform: translate(2px, 0); }
+  20%  { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+  30%  { clip-path: inset(50% 0 35% 0);  transform: translate(2px, 1px); }
+  32%  { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+  40%  { clip-path: inset(10% 0 75% 0);  transform: translate(2px, 0); }
+  42%  { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+  55%  { clip-path: inset(85% 0 5% 0);   transform: translate(2px, -1px); }
+  57%  { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+  65%  { clip-path: inset(25% 0 55% 0);  transform: translate(2px, 0); }
+  67%  { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+  80%  { clip-path: inset(60% 0 25% 0);  transform: translate(2px, 1px); }
+  82%  { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+  95%  { clip-path: inset(3% 0 88% 0);   transform: translate(2px, 0); }
+  97%  { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+  100% { clip-path: inset(95% 0 0 0);    transform: translate(0, 0); }
+}
+
+/* ----------------------------------------------------------
+   VHS NOISE
+   Generates a static-noise pattern via SVG filter.
+   Usage: <div class="vhs-noise"> ... </div>
+---------------------------------------------------------- */
+.vhs-noise {
+  position: relative;
+  overflow: hidden;
+}
+
+.vhs-noise::after {
+  content:  '';
+  position: absolute;
+  inset:    0;
+  pointer-events: none;
+  opacity:  0.06;
+  z-index:  var(--z-overlay, 10);
+
+  /* Tightly tiled noise pattern built from a data-URI SVG turbulence filter */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size:   200px 200px;
+
+  animation: vhs-noise-shift 0.08s steps(1) infinite;
+}
+
+@keyframes vhs-noise-shift {
+  0%   { background-position: 0   0;   }
+  20%  { background-position: -30px 15px; }
+  40%  { background-position: 20px -10px; }
+  60%  { background-position: -15px 25px; }
+  80%  { background-position: 10px -20px; }
+  100% { background-position: 0   0;   }
+}
+
+/* ----------------------------------------------------------
+   SCANLINE TEXT
+   Overlays a horizontal scanline pattern on top of text.
+   Usage: <span class="scanline-text">NEON</span>
+---------------------------------------------------------- */
+.scanline-text {
+  position:   relative;
+  display:    inline-block;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent          0px,
+    transparent          3px,
+    rgba(0, 0, 0, 0.35)  3px,
+    rgba(0, 0, 0, 0.35)  4px
+  );
+  -webkit-background-clip: text;
+  background-clip:         text;
+}
+
+/* ----------------------------------------------------------
+   RETRO BORDER
+   A neon-glow bordered box with dashed corner decorations.
+   Usage: <div class="retro-border"> ... </div>
+---------------------------------------------------------- */
+.retro-border {
+  position:      relative;
+  border:        1px solid var(--color-pink, #FF6EC7);
+  border-radius: var(--border-radius-md, 8px);
+  padding:       var(--space-lg, 32px);
+
+  box-shadow:
+    /* outer glow */
+    0 0 8px  rgba(255, 110, 199, 0.6),
+    0 0 20px rgba(255, 110, 199, 0.3),
+    /* inset glow */
+    inset 0 0 8px  rgba(255, 110, 199, 0.15),
+    inset 0 0 20px rgba(157, 0, 255, 0.1);
+}
+
+/* Corner accent — top-left */
+.retro-border::before {
+  content:  '';
+  position: absolute;
+  top:      -4px;
+  left:     -4px;
+  width:    20px;
+  height:   20px;
+
+  /* Two-sided dashed corner */
+  border-top:  3px dashed var(--color-cyan, #00FFFF);
+  border-left: 3px dashed var(--color-cyan, #00FFFF);
+
+  box-shadow:
+    -2px -2px 8px rgba(0, 255, 255, 0.6);
+}
+
+/* Corner accent — bottom-right */
+.retro-border::after {
+  content:  '';
+  position: absolute;
+  bottom:   -4px;
+  right:    -4px;
+  width:    20px;
+  height:   20px;
+
+  border-bottom: 3px dashed var(--color-cyan, #00FFFF);
+  border-right:  3px dashed var(--color-cyan, #00FFFF);
+
+  box-shadow:
+    2px 2px 8px rgba(0, 255, 255, 0.6);
+}
+
+/* ----------------------------------------------------------
+   CARD HOVER GLOW
+   Drop-in class for any card element that should glow on hover.
+   Usage: <div class="card-hover-glow"> ... </div>
+---------------------------------------------------------- */
+.card-hover-glow {
+  transition:
+    box-shadow var(--transition-med, 0.3s ease),
+    transform  var(--transition-med, 0.3s ease),
+    border-color var(--transition-med, 0.3s ease);
+  will-change: box-shadow, transform;
+}
+
+.card-hover-glow:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 0 12px  var(--color-pink,   #FF6EC7),
+    0 0 24px  rgba(255, 110, 199, 0.5),
+    0 0 48px  rgba(157, 0,   255, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.6);
+
+  border-color: var(--color-cyan, #00FFFF);
+}
+
+.card-hover-glow:focus-visible {
+  outline:       none;
+  box-shadow:
+    0 0 0 3px   var(--color-cyan, #00FFFF),
+    0 0 20px    rgba(0, 255, 255, 0.5);
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION — disable all animations for accessibility
+---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:   0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:  0.01ms !important;
+    scroll-behavior:      auto   !important;
+  }
+}

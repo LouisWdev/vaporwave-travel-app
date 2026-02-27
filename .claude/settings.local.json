@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(printf y\\\\n:*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

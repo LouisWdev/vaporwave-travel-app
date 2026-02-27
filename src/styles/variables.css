@@ -1,0 +1,101 @@
+/* ============================================================
+   VAPORWAVE VOID SQUAD — DESIGN TOKENS
+   variables.css
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     COLORS
+  ---------------------------------------------------------- */
+  --color-pink:          #FF6EC7;
+  --color-cyan:          #00FFFF;
+  --color-purple:        #9D00FF;
+  --color-deep-purple:   #3D0070;
+  --color-navy:          #0A0015;
+  --color-dark:          #05000A;
+  --color-sunset-orange: #FF6B35;
+  --color-sunset-yellow: #FFD93D;
+  --color-grid-line:     rgba(255, 110, 199, 0.3);
+  --color-text-glow:     #FF6EC7;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY
+  ---------------------------------------------------------- */
+  --font-display: 'Bebas Neue', cursive;
+  --font-mono:    'VT323', monospace;
+  --font-tech:    'Orbitron', sans-serif;
+
+  /* ----------------------------------------------------------
+     SIZING & LAYOUT
+  ---------------------------------------------------------- */
+  --nav-height: 60px;
+
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  32px;
+  --space-xl:  64px;
+  --space-xxl: 128px;
+
+  --container-max: 1280px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+  /* ----------------------------------------------------------
+     GLOW EFFECTS
+  ---------------------------------------------------------- */
+  --glow-pink:
+    0 0 10px #FF6EC7,
+    0 0 20px #FF6EC7,
+    0 0 40px rgba(255, 110, 199, 0.5);
+
+  --glow-cyan:
+    0 0 10px #00FFFF,
+    0 0 20px #00FFFF,
+    0 0 40px rgba(0, 255, 255, 0.5);
+
+  --glow-purple:
+    0 0 10px #9D00FF,
+    0 0 20px #9D00FF,
+    0 0 40px rgba(157, 0, 255, 0.5);
+
+  --glow-sunset:
+    0 0 10px #FF6B35,
+    0 0 20px #FFD93D,
+    0 0 40px rgba(255, 107, 53, 0.5);
+
+  --glow-text-pink:
+    0 0 8px  #FF6EC7,
+    0 0 16px #FF6EC7,
+    0 0 32px rgba(255, 110, 199, 0.6);
+
+  --glow-text-cyan:
+    0 0 8px  #00FFFF,
+    0 0 16px #00FFFF,
+    0 0 32px rgba(0, 255, 255, 0.6);
+
+  --glow-text-purple:
+    0 0 8px  #9D00FF,
+    0 0 16px #9D00FF,
+    0 0 32px rgba(157, 0, 255, 0.6);
+
+  /* ----------------------------------------------------------
+     TRANSITIONS
+  ---------------------------------------------------------- */
+  --transition-fast: 0.15s ease;
+  --transition-med:  0.3s ease;
+  --transition-slow: 0.6s ease;
+
+  /* ----------------------------------------------------------
+     Z-INDEX LAYERS
+  ---------------------------------------------------------- */
+  --z-bg:      0;
+  --z-scene:   1;
+  --z-overlay: 10;
+  --z-ui:      100;
+  --z-modal:   1000;
+  --z-vhs:     9999;
+
+}
