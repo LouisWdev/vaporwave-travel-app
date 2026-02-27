@@ -5,7 +5,8 @@
       "Bash(printf y\\\\n:*)",
       "Bash(npm install:*)",
       "Bash(npm run:*)",
-      "Bash(npm build:*)"
+      "Bash(npm build:*)",
+      "Bash(node:*)"
     ]
   }
 }
