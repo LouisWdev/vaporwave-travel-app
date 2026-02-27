@@ -89,12 +89,13 @@ function TourSceneContent({ onBookHotspot, vaporMode = false }) {
 
       <VaporGrid color={vaporMode ? '#FF00CC' : '#9D00FF'} size={30} divisions={25} />
 
-      {/* Scattered palms */}
+      {/* Center palm — focal point of the scene */}
+      <PalmTree position={[0, -1, 0]} color="#FF6EC7" accentColor="#00FFFF" scale={1.8} spinSpeed={0.1} />
+      {/* Scattered background palms */}
       <PalmTree position={[-3, -1, -2]} color="#FF6EC7" accentColor="#9D00FF" scale={1.3} spinSpeed={0.2} />
       <PalmTree position={[3, -1, -3]} color="#00FFFF" accentColor="#FF6EC7" scale={1.1} spinSpeed={0.3} />
       <PalmTree position={[-6, -1, -5]} color="#9D00FF" accentColor="#00FFFF" scale={0.9} spinSpeed={0.15} />
       <PalmTree position={[6, -1, -4]} color="#FFD93D" accentColor="#FF6B35" scale={1.0} spinSpeed={0.25} />
-      <PalmTree position={[0, -1, -8]} color="#FF6EC7" accentColor="#00FFFF" scale={1.6} spinSpeed={0.1} />
       <PalmTree position={[-9, -1, -7]} color="#00FFFF" accentColor="#9D00FF" scale={0.7} spinSpeed={0.4} />
       <PalmTree position={[9, -1, -6]} color="#9D00FF" accentColor="#FF6EC7" scale={0.8} spinSpeed={0.2} />
 
