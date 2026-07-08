@@ -24,41 +24,16 @@ export default function DestinationsGrid() {
     })
   }, [searchQuery, activeVibe])
 
-  const sectionStyle = {
-    padding: '4rem 2rem',
-    maxWidth: '1200px',
-    margin: '0 auto',
-  }
-
-  const headingStyle = {
-    fontFamily: "'Bebas Neue', sans-serif",
-    fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-    letterSpacing: '0.12em',
-    color: '#FF6EC7',
-    textShadow: '0 0 20px rgba(255,110,199,0.5)',
-    textAlign: 'center',
-    marginBottom: '2.5rem',
-  }
-
-  const gridStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-    gap: '1.75rem',
-  }
-
-  const emptyStyle = {
-    gridColumn: '1 / -1',
-    textAlign: 'center',
-    fontFamily: "'VT323', monospace",
-    fontSize: '1.4rem',
-    color: 'rgba(200,180,255,0.45)',
-    letterSpacing: '0.1em',
-    padding: '3rem 0',
-  }
-
   return (
-    <section id="destinations" style={sectionStyle}>
-      <h2 style={headingStyle}>// CHOOSE YOUR ESCAPE //</h2>
+    <section id="departures" className="departures">
+      <div className="section-head">
+        <h2 className="section-title">
+          Tonight&rsquo;s <em>departures</em>
+        </h2>
+        <span className="section-meta">
+          {filtered.length} ROUTES · ALL FARES ONE-WAY
+        </span>
+      </div>
 
       <SearchFilter
         vibes={VIBES}
@@ -68,7 +43,7 @@ export default function DestinationsGrid() {
         onSearchChange={setSearchQuery}
       />
 
-      <div style={gridStyle}>
+      <div className="cards">
         {filtered.length > 0 ? (
           filtered.map((dest) => (
             <DestinationCard
@@ -78,9 +53,7 @@ export default function DestinationsGrid() {
             />
           ))
         ) : (
-          <p style={emptyStyle}>
-            NO SIGNAL IN THIS SECTOR... TRY A DIFFERENT FREQUENCY
-          </p>
+          <p className="empty">No departures match. Adjust your search.</p>
         )}
       </div>
 

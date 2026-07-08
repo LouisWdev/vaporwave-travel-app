@@ -1,103 +1,103 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
 import PalmTree from './PalmTree'
+import VaporGrid from './VaporGrid'
+import RetroSun from './RetroSun'
 
-function SpinningPalm({ color, accentColor, isHovered }) {
-  return <PalmTree color={color} accentColor={accentColor} scale={0.9} spinSpeed={isHovered ? 1.5 : 0.3} />
-}
+// Each card preview is a little postcard diorama: mini sun on the horizon,
+// grid floor in the destination's color, and its landmark in front.
+// No postprocessing here — eight canvases with bloom would tank the page.
 
-function SpinningPlane({ color, isHovered }) {
+function Turntable({ hovered, children }) {
   const ref = useRef()
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (ref.current) {
-      const boost = document.body.classList.contains('vapor-mode') ? 3 : 1
-      ref.current.rotation.y += delta * (isHovered ? 1.5 : 0.4) * boost
-      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.15
+      ref.current.rotation.y += delta * (hovered ? 0.9 : 0.2)
     }
   })
+  return <group ref={ref}>{children}</group>
+}
+
+function Plane({ color }) {
   return (
-    <group ref={ref}>
-      {/* Fuselage */}
+    <group rotation={[0.1, 0, 0.08]}>
       <mesh>
-        <capsuleGeometry args={[0.08, 0.6, 4, 8]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.4} />
+        <capsuleGeometry args={[0.09, 0.65, 4, 8]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.6} />
       </mesh>
-      {/* Wings */}
-      <mesh rotation={[0, 0, 0]} position={[0, 0, 0]}>
-        <boxGeometry args={[0.8, 0.03, 0.2]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.3} transparent opacity={0.9} />
+      <mesh>
+        <boxGeometry args={[0.9, 0.03, 0.22]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} />
       </mesh>
-      {/* Tail */}
-      <mesh position={[0, 0.1, -0.3]} rotation={[0, 0, 0]}>
-        <boxGeometry args={[0.25, 0.15, 0.03]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.3} />
+      <mesh position={[0, 0.12, -0.32]}>
+        <boxGeometry args={[0.28, 0.16, 0.03]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} />
       </mesh>
     </group>
   )
 }
 
-function SpinningCube({ color, isHovered }) {
-  const ref = useRef()
-  useFrame((state, delta) => {
-    if (ref.current) {
-      const boost = document.body.classList.contains('vapor-mode') ? 3 : 1
-      ref.current.rotation.y += delta * (isHovered ? 1.2 : 0.3) * boost
-      ref.current.rotation.x += delta * (isHovered ? 0.5 : 0.1) * boost
-    }
-  })
+function Cube({ color }) {
   return (
-    <group ref={ref}>
+    <group>
       <mesh>
-        <boxGeometry args={[0.7, 0.7, 0.7]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.3} wireframe={false} />
+        <boxGeometry args={[0.65, 0.65, 0.65]} />
+        <meshStandardMaterial color="#0D051E" />
       </mesh>
       <mesh>
-        <boxGeometry args={[0.72, 0.72, 0.72]} />
-        <meshStandardMaterial color={color} wireframe transparent opacity={0.5} emissive={color} emissiveIntensity={0.8} />
+        <boxGeometry args={[0.66, 0.66, 0.66]} />
+        <meshBasicMaterial color={color} wireframe />
       </mesh>
     </group>
   )
 }
 
-function SpinningPyramid({ color, isHovered }) {
-  const ref = useRef()
-  useFrame((state, delta) => {
-    if (ref.current) {
-      const boost = document.body.classList.contains('vapor-mode') ? 3 : 1
-      ref.current.rotation.y += delta * (isHovered ? 1.0 : 0.25) * boost
-    }
-  })
+function Pyramid({ color }) {
   return (
-    <mesh ref={ref}>
-      <coneGeometry args={[0.5, 0.9, 4]} />
-      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} wireframe={false} />
-    </mesh>
+    <group>
+      <mesh>
+        <coneGeometry args={[0.5, 0.85, 4]} />
+        <meshStandardMaterial color="#0D051E" />
+      </mesh>
+      <mesh>
+        <coneGeometry args={[0.51, 0.86, 4]} />
+        <meshBasicMaterial color={color} wireframe />
+      </mesh>
+    </group>
   )
 }
 
-export default function DestinationPreview({ model = 'palm', color = '#FF6EC7', accentColor = '#00FFFF' }) {
-  const [isHovered, setIsHovered] = useState(false)
-
+export default function DestinationPreview({
+  model = 'palm',
+  color = '#FF71CE',
+  accentColor = '#01CDFE',
+  hovered = false,
+}) {
   return (
-    <div
-      style={{ width: '100%', height: '160px', cursor: 'pointer' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div style={{ width: '100%', height: '100%' }}>
       <Canvas
-        camera={{ position: [0, 0.5, 3], fov: 45 }}
+        camera={{ position: [0, 0.7, 3.6], fov: 42 }}
         gl={{ antialias: true, alpha: true }}
-        style={{ background: 'transparent' }}
+        dpr={[1, 1.5]}
       >
-        <ambientLight intensity={0.3} />
+        <ambientLight intensity={0.45} />
         <pointLight position={[2, 2, 2]} color={color} intensity={2} />
-        <pointLight position={[-2, -1, -1]} color={accentColor} intensity={1} />
+        <pointLight position={[-2, 1, -1]} color={accentColor} intensity={1.2} />
 
-        {model === 'palm' && <SpinningPalm color={color} accentColor={accentColor} isHovered={isHovered} />}
-        {model === 'plane' && <SpinningPlane color={color} isHovered={isHovered} />}
-        {model === 'cube' && <SpinningCube color={color} isHovered={isHovered} />}
-        {model === 'pyramid' && <SpinningPyramid color={color} isHovered={isHovered} />}
+        <RetroSun position={[0, 0.9, -7]} radius={2.2} bottom={color} />
+        <VaporGrid color={color} y={-0.62} size={40} fadeNear={2} fadeFar={14} />
+
+        {model === 'palm' ? (
+          <PalmTree position={[0.1, -0.62, 0.4]} scale={0.62} phase={1} />
+        ) : (
+          <Turntable hovered={hovered}>
+            <group position={[0, 0.15, 0]}>
+              {model === 'plane' && <Plane color={color} />}
+              {model === 'cube' && <Cube color={color} />}
+              {model === 'pyramid' && <Pyramid color={color} />}
+            </group>
+          </Turntable>
+        )}
       </Canvas>
     </div>
   )

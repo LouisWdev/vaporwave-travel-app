@@ -1,56 +1,100 @@
 import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 
-// Single frond (leaf)
-function Frond({ angle, tilt, color }) {
+// Palms read as dark silhouettes against the sun — the classic outrun
+// composition — instead of glowing neon props. Unlit material, so they
+// need no lights and stay pure black against the bloom.
+const SILHOUETTE = '#0D051E'
+
+function Frond({ angle, droop, length }) {
   return (
-    <group rotation={[0, angle, 0]}>
-      <mesh rotation={[tilt, 0, 0]} position={[0.3, 0, 0]}>
-        <coneGeometry args={[0.05, 0.8, 4]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.3} />
+    <group rotation={[0, angle, droop]}>
+      {/* main blade */}
+      <mesh
+        position={[length / 2, 0, 0]}
+        rotation={[0, 0, -Math.PI / 2]}
+        scale={[1, 1, 0.35]}
+      >
+        <coneGeometry args={[0.05, length, 6]} />
+        <meshBasicMaterial color={SILHOUETTE} />
       </mesh>
+      {/* drooping tip */}
+      <group position={[length * 0.9, 0, 0]} rotation={[0, 0, -0.7]}>
+        <mesh
+          position={[length * 0.18, 0, 0]}
+          rotation={[0, 0, -Math.PI / 2]}
+          scale={[1, 1, 0.35]}
+        >
+          <coneGeometry args={[0.03, length * 0.45, 6]} />
+          <meshBasicMaterial color={SILHOUETTE} />
+        </mesh>
+      </group>
     </group>
   )
 }
 
-export default function PalmTree({ position = [0,0,0], color = '#FF6EC7', accentColor = '#00FFFF', scale = 1, spinSpeed = 0.3 }) {
-  const groupRef = useRef()
+const FRONDS = [
+  { angle: 0.0, droop: -0.25, length: 1.05 },
+  { angle: 0.8, droop: -0.5, length: 0.95 },
+  { angle: 1.6, droop: -0.15, length: 1.1 },
+  { angle: 2.4, droop: -0.6, length: 0.9 },
+  { angle: 3.1, droop: -0.35, length: 1.0 },
+  { angle: 3.9, droop: -0.2, length: 1.05 },
+  { angle: 4.7, droop: -0.55, length: 0.92 },
+  { angle: 5.5, droop: -0.4, length: 1.0 },
+]
 
-  useFrame((state, delta) => {
-    if (groupRef.current) {
-      const boost = document.body.classList.contains('vapor-mode') ? 3.5 : 1
-      groupRef.current.rotation.y += delta * spinSpeed * boost
+const TRUNK_SEGMENTS = 4
+
+export default function PalmTree({
+  position = [0, 0, 0],
+  scale = 1,
+  lean = 0.08,
+  phase = 0,
+}) {
+  const crownRef = useRef()
+
+  useFrame((state) => {
+    if (crownRef.current) {
+      const boost = document.body.classList.contains('vapor-mode') ? 3 : 1
+      const t = state.clock.elapsedTime
+      crownRef.current.rotation.z =
+        Math.sin(t * 0.6 * boost + phase) * 0.05
     }
   })
 
-  const frondCount = 7
+  const segH = 0.45
+  const crownY = TRUNK_SEGMENTS * segH * 0.96
 
   return (
-    <group ref={groupRef} position={position} scale={scale}>
-      {/* Trunk - tapered cylinder */}
-      <mesh position={[0, 0.75, 0]}>
-        <cylinderGeometry args={[0.04, 0.08, 1.5, 8]} />
-        <meshStandardMaterial color={accentColor} emissive={accentColor} emissiveIntensity={0.2} wireframe={false} />
-      </mesh>
-      {/* Trunk glow ring */}
-      <mesh position={[0, 0.75, 0]}>
-        <cylinderGeometry args={[0.06, 0.1, 1.5, 8]} />
-        <meshStandardMaterial color={color} transparent opacity={0.1} emissive={color} emissiveIntensity={0.5} />
-      </mesh>
-      {/* Crown */}
-      <group position={[0, 1.5, 0]}>
-        {Array.from({ length: frondCount }).map((_, i) => (
-          <Frond
-            key={i}
-            angle={(i / frondCount) * Math.PI * 2}
-            tilt={Math.PI * 0.35}
-            color={color}
+    <group position={position} scale={scale} rotation={[0, 0, lean]}>
+      {/* curved trunk built from leaning segments */}
+      {Array.from({ length: TRUNK_SEGMENTS }).map((_, i) => (
+        <mesh
+          key={i}
+          position={[i * i * 0.022, i * segH * 0.95 + segH / 2, 0]}
+          rotation={[0, 0, -i * 0.05]}
+        >
+          <cylinderGeometry
+            args={[0.065 - i * 0.008, 0.075 - i * 0.008, segH, 7]}
           />
+          <meshBasicMaterial color={SILHOUETTE} />
+        </mesh>
+      ))}
+
+      {/* crown */}
+      <group ref={crownRef} position={[0.28, crownY, 0]}>
+        {FRONDS.map((f, i) => (
+          <Frond key={i} {...f} />
         ))}
-        {/* Center sphere */}
-        <mesh>
-          <sphereGeometry args={[0.12, 8, 8]} />
-          <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.8} />
+        {/* coconuts */}
+        <mesh position={[0.08, -0.06, 0.05]}>
+          <sphereGeometry args={[0.07, 6, 6]} />
+          <meshBasicMaterial color={SILHOUETTE} />
+        </mesh>
+        <mesh position={[-0.07, -0.08, -0.04]}>
+          <sphereGeometry args={[0.06, 6, 6]} />
+          <meshBasicMaterial color={SILHOUETTE} />
         </mesh>
       </group>
     </group>

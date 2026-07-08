@@ -1,0 +1,270 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1783530280750,
+  "projectRoot": "C:\\_MyStuff\\Projects\\vaporwave-travel-app",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": ">=18",
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "react",
+        "version": "18.3.1",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "18.3.1",
+        "category": "frontend"
+      },
+      {
+        "name": "vite",
+        "version": "6.0.7",
+        "category": "build"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": "Node.js 18"
+  },
+  "build": {
+    "buildCommand": "cd \"C:\\_MyStuff\\Projects\\vaporwave-travel-app\" && npm install 2>&1 | tail -5 && npm run build 2>&1 | tail -20",
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "vite",
+      "build": "vite build",
+      "preview": "vite preview"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "public",
+      "src"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 1,
+      "lastAccessed": 1783530280695,
+      "keyFiles": [
+        "favicon.svg"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 2,
+      "lastAccessed": 1783530280696,
+      "keyFiles": [
+        "App.jsx",
+        "main.jsx"
+      ]
+    },
+    "src\\components": {
+      "path": "src\\components",
+      "purpose": "UI components",
+      "fileCount": 6,
+      "lastAccessed": 1783530280712,
+      "keyFiles": [
+        "BookingModal.jsx",
+        "DestinationCard.jsx",
+        "DestinationsGrid.jsx"
+      ]
+    },
+    "src\\data": {
+      "path": "src\\data",
+      "purpose": "Data files",
+      "fileCount": 1,
+      "lastAccessed": 1783530280716,
+      "keyFiles": [
+        "destinations.js"
+      ]
+    },
+    "src\\pages": {
+      "path": "src\\pages",
+      "purpose": "Page components",
+      "fileCount": 2,
+      "lastAccessed": 1783530280716,
+      "keyFiles": [
+        "HomePage.jsx",
+        "TourPage.jsx"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src\\styles\\variables.css",
+      "accessCount": 2,
+      "lastAccessed": 1783531026234,
+      "type": "file"
+    },
+    {
+      "path": "src\\styles\\global.css",
+      "accessCount": 2,
+      "lastAccessed": 1783531027177,
+      "type": "file"
+    },
+    {
+      "path": "src\\scenes\\VaporGrid.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531109205,
+      "type": "file"
+    },
+    {
+      "path": "src\\scenes\\PalmTree.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531122654,
+      "type": "file"
+    },
+    {
+      "path": "src\\data\\destinations.js",
+      "accessCount": 2,
+      "lastAccessed": 1783531144989,
+      "type": "file"
+    },
+    {
+      "path": "src\\scenes\\HeroScene.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531163103,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\Navbar.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531172345,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\DestinationCard.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531178516,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\SearchFilter.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531182121,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\DestinationsGrid.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531188148,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\BookingModal.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531204569,
+      "type": "file"
+    },
+    {
+      "path": "src\\scenes\\DestinationPreview.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531217822,
+      "type": "file"
+    },
+    {
+      "path": "src\\scenes\\TourScene.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531245866,
+      "type": "file"
+    },
+    {
+      "path": "src\\pages\\TourPage.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531249213,
+      "type": "file"
+    },
+    {
+      "path": "src\\pages\\HomePage.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531251996,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\VHSOverlay.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531252924,
+      "type": "file"
+    },
+    {
+      "path": "src\\main.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1783531254647,
+      "type": "file"
+    },
+    {
+      "path": "index.html",
+      "accessCount": 2,
+      "lastAccessed": 1783531258994,
+      "type": "file"
+    },
+    {
+      "path": "src\\scenes\\OrbitingSun.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1783530627153,
+      "type": "file"
+    },
+    {
+      "path": "src\\App.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1783530628350,
+      "type": "file"
+    },
+    {
+      "path": "src\\styles\\glitch.css",
+      "accessCount": 1,
+      "lastAccessed": 1783530713044,
+      "type": "file"
+    },
+    {
+      "path": "src\\styles\\ui.css",
+      "accessCount": 1,
+      "lastAccessed": 1783531087217,
+      "type": "file"
+    },
+    {
+      "path": "src\\scenes\\RetroSun.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1783531100380,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\DepartureBoard.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1783531149216,
+      "type": "file"
+    },
+    {
+      "path": "src",
+      "accessCount": 1,
+      "lastAccessed": 1783531267705,
+      "type": "directory"
+    }
+  ],
+  "userDirectives": []
+}
